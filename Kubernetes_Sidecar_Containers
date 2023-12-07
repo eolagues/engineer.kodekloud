@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: webserver
+  name: webserver
+spec:
+  containers:
+  - command: ["sh","-c","while true; do cat /var/log/nginx/access.log /var/log/nginx/error.log; sleep 30; done"]
+    image: ubuntu:latest
+    name: sidecar-container
+    volumeMounts:
+        - name: shared-logs
+          mountPath: /var/log/nginx
+  - image: nginx:latest
+    name: nginx-container
+    volumeMounts:
+        - name: shared-logs
+          mountPath: /var/log/nginx
+  volumes:
+    - name: shared-logs
+      emptyDir:
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
