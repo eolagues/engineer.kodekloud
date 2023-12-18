@@ -38,4 +38,4 @@ spec:
       mountPath: /opt/data/time/
   volumes:
   - name: log-volume
-      emptyDir: {}
+    emptyDir: {}
