@@ -28,7 +28,7 @@ spec:
     command: ["/bin/sh"]
     args: ["-c", "while true; do date; sleep $TIME_FREQ;done > /opt/data/time/time-check.log"]
     env:
-    - name: time-config
+    - name: TIME_FREQ
       valueFrom:
         configMapKeyRef:
           name: time-config
